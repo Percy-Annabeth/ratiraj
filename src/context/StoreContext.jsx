@@ -81,4 +81,4 @@ export function useStore() {
 }
 
 // ✏️ Change this to your WhatsApp number (country code + number, no + or spaces)
-export const WHATSAPP_NUMBER = '919876543210';
+export const WHATSAPP_NUMBER = '919212422201';
