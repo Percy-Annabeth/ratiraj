@@ -18,6 +18,7 @@ export default function ProductDetail() {
   const [phone, setPhone] = useState('');
   const [showOrderForm, setShowOrderForm] = useState(false);
   const [orderPlaced, setOrderPlaced] = useState(false);
+  const [activeImg, setActiveImg] = useState(0);
 
   const product = state.products.find(p => p.id === id);
 
@@ -31,6 +32,16 @@ export default function ProductDetail() {
     </div>
   );
 
+  // Support both old single `image` and new `images` array
+  const allImages = (product.images && product.images.length > 0)
+    ? product.images
+    : product.image
+      ? [product.image]
+      : [];
+
+  const PLACEHOLDER = 'https://via.placeholder.com/600x600/F7EFD8/C9A84C?text=Ratiraj+Jewels';
+  const currentImage = allImages[activeImg] || PLACEHOLDER;
+
   const discount = product.originalPrice
     ? Math.round((1 - product.price / product.originalPrice) * 100)
     : null;
@@ -41,19 +52,19 @@ export default function ProductDetail() {
 
   const handleWhatsAppOrder = () => {
     const msg = encodeURIComponent([
-      `🛒 *New Order — Ratiraj Jewels*`,
+      `*New Order for* ${name}`,
       ``,
-      `📦 *Product:* ${product.name}`,
-      `💰 *Price:* ₹${product.price.toLocaleString('en-IN')} × ${qty} = ₹${(product.price * qty).toLocaleString('en-IN')}`,
-      `🏷️ *Category:* ${product.category}`,
+      `*Product:* ${product.name}`,
+      `*Price:* ₹${product.price.toLocaleString('en-IN')} × ${qty} = ₹${(product.price * qty).toLocaleString('en-IN')}`,
+      `*Category:* ${product.category}`,
       ``,
-      `👤 *Customer Name:* ${name}`,
-      `📞 *Phone:* ${phone}`,
-      `📍 *Address:* ${address}`,
+      `*Customer Name:* ${name}`,
+      `*Phone:* ${phone}`,
+      `*Address:* ${address}`,
       ``,
-      `💵 *Payment:* Cash on Delivery`,
+      `*Payment:* Cash on Delivery`,
       ``,
-      `_Sent from Ratiraj Jewels website_`,
+      `Sent from Ratiraj Jewels website`,
     ].join('\n'));
 
     dispatch({
@@ -93,14 +104,87 @@ export default function ProductDetail() {
       {/* Product */}
       <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: 40, marginBottom: 56 }}>
 
-        {/* Image */}
-        <div style={{ borderRadius: 20, overflow: 'hidden', background: '#fdf8f0', aspectRatio: '1/1', maxHeight: 500 }}>
-          <img
-            src={product.image}
-            alt={product.name}
-            style={{ width: '100%', height: '100%', objectFit: 'cover' }}
-            onError={e => { e.target.src = 'https://via.placeholder.com/600x600/F7EFD8/C9A84C?text=Ratiraj+Jewels'; }}
-          />
+        {/* Image Gallery */}
+        <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
+          {/* Main image */}
+          <div style={{ borderRadius: 20, overflow: 'hidden', background: '#fdf8f0', aspectRatio: '1/1', maxHeight: 500, position: 'relative' }}>
+            <img
+              src={currentImage}
+              alt={product.name}
+              style={{ width: '100%', height: '100%', objectFit: 'cover' }}
+              onError={e => { e.target.src = PLACEHOLDER; }}
+            />
+            {/* Prev/Next arrows — only show if multiple images */}
+            {allImages.length > 1 && (
+              <>
+                <button
+                  onClick={() => setActiveImg(i => (i - 1 + allImages.length) % allImages.length)}
+                  style={{
+                    position: 'absolute', left: 10, top: '50%', transform: 'translateY(-50%)',
+                    background: 'rgba(255,255,255,0.85)', border: 'none', borderRadius: '50%',
+                    width: 36, height: 36, cursor: 'pointer', fontSize: 18, color: '#C0272D',
+                    display: 'flex', alignItems: 'center', justifyContent: 'center',
+                    boxShadow: '0 2px 8px rgba(0,0,0,0.12)',
+                  }}
+                  aria-label="Previous image"
+                >‹</button>
+                <button
+                  onClick={() => setActiveImg(i => (i + 1) % allImages.length)}
+                  style={{
+                    position: 'absolute', right: 10, top: '50%', transform: 'translateY(-50%)',
+                    background: 'rgba(255,255,255,0.85)', border: 'none', borderRadius: '50%',
+                    width: 36, height: 36, cursor: 'pointer', fontSize: 18, color: '#C0272D',
+                    display: 'flex', alignItems: 'center', justifyContent: 'center',
+                    boxShadow: '0 2px 8px rgba(0,0,0,0.12)',
+                  }}
+                  aria-label="Next image"
+                >›</button>
+                {/* Dot indicators */}
+                <div style={{ position: 'absolute', bottom: 12, left: '50%', transform: 'translateX(-50%)', display: 'flex', gap: 6 }}>
+                  {allImages.map((_, i) => (
+                    <button
+                      key={i}
+                      onClick={() => setActiveImg(i)}
+                      style={{
+                        width: i === activeImg ? 20 : 8, height: 8,
+                        borderRadius: 999, border: 'none', cursor: 'pointer',
+                        background: i === activeImg ? '#C0272D' : 'rgba(255,255,255,0.7)',
+                        transition: 'all 0.2s', padding: 0,
+                      }}
+                      aria-label={`Image ${i + 1}`}
+                    />
+                  ))}
+                </div>
+              </>
+            )}
+          </div>
+
+          {/* Thumbnail strip */}
+          {allImages.length > 1 && (
+            <div style={{ display: 'flex', gap: 8, flexWrap: 'wrap' }}>
+              {allImages.map((img, i) => (
+                <button
+                  key={i}
+                  onClick={() => setActiveImg(i)}
+                  style={{
+                    width: 64, height: 64, borderRadius: 10, overflow: 'hidden', padding: 0, border: 'none',
+                    outline: i === activeImg ? '2.5px solid #C0272D' : '2px solid transparent',
+                    cursor: 'pointer', background: '#fdf8f0', flexShrink: 0,
+                    boxShadow: i === activeImg ? '0 0 0 1px #C0272D' : 'none',
+                    transition: 'outline 0.15s',
+                  }}
+                  aria-label={`View image ${i + 1}`}
+                >
+                  <img
+                    src={img}
+                    alt={`${product.name} ${i + 1}`}
+                    style={{ width: '100%', height: '100%', objectFit: 'cover' }}
+                    onError={e => { e.target.src = PLACEHOLDER; }}
+                  />
+                </button>
+              ))}
+            </div>
+          )}
         </div>
 
         {/* Details */}
@@ -267,7 +351,7 @@ export default function ProductDetail() {
 
             {/* Product summary */}
             <div style={{ background: '#f9f6f0', borderRadius: 12, padding: 14, marginBottom: 20, display: 'flex', gap: 12, alignItems: 'center' }}>
-              <img src={product.image} alt="" style={{ width: 60, height: 60, borderRadius: 8, objectFit: 'cover' }} onError={e => e.target.style.display = 'none'} />
+              <img src={allImages[0] || PLACEHOLDER} alt="" style={{ width: 60, height: 60, borderRadius: 8, objectFit: 'cover' }} onError={e => e.target.style.display = 'none'} />
               <div>
                 <p style={{ margin: 0, fontWeight: 600, fontSize: 14, fontFamily: 'DM Sans, sans-serif' }}>{product.name}</p>
                 <p style={{ margin: '4px 0 0', color: '#C0272D', fontWeight: 700, fontFamily: 'DM Sans, sans-serif' }}>

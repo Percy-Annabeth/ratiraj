@@ -82,7 +82,7 @@ export default function Navbar() {
               fontSize: 11,
               fontWeight: 500,
               textDecoration: 'none',
-              border: '1px solid #e8e0d0',
+              border: '3px solid #e8e0d0',
               fontFamily: 'DM Sans, sans-serif',
             }}>
               🔒
