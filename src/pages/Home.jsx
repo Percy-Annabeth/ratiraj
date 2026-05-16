@@ -5,8 +5,8 @@ import ProductCard from '../components/ProductCard';
 // ─── THEME COLOR VARIABLES ──────────────────────────────────────────────────
 const C = {
   // Dark backgrounds (hero, banners, about)
-  heroBgStart:      '#2c0000',
-  heroBgMid:        '#510008',
+  heroBgStart:      '#550101',
+  heroBgMid:        '#8b000e',
 
   // Light section backgrounds
   sectionBgLight:   '#FDF3D0',   // was #FAFAFA
