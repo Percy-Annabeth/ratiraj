@@ -1,5 +1,35 @@
 import { WHATSAPP_NUMBER } from '../context/StoreContext';
 
+// ─── THEME COLORS ───────────────────────────────────────────────────────────
+const C = {
+  // Reds
+  deepRed:        '#350003',
+  darkRed:        '#520004',
+  midRed:         '#870108',
+  crimson:        '#e7050c',
+  crimsonLight:   '#E8353C',
+
+  // Golds
+  goldDeep:       '#8B6914',
+  gold:           '#C9A84C',
+  goldBright:     '#E8C76A',
+  goldPale:       '#F5E6B8',
+  goldCream:      '#FDF6E3',
+
+  // Text
+  textOnDark:     '#F5E6B8',
+  textMuted:      '#C4A882',
+  textOnGold:     '#3A0A0C',
+  textOnCrimson:  '#FDF6E3',
+
+  // Borders / UI
+  borderGold:     'rgba(201,168,76,0.35)',
+  borderRed:      'rgba(192,39,45,0.3)',
+  glowGold:       'rgba(201,168,76,0.18)',
+  glowRed:        'rgba(192,39,45,0.18)',
+};
+// ────────────────────────────────────────────────────────────────────────────
+
 const CONTACTS = [
   {
     icon: (
@@ -55,25 +85,25 @@ export default function Contact() {
   return (
     <div>
       {/* Hero */}
-      <section style={{ background: 'linear-gradient(135deg, #1a0a0b, #2d1010)', padding: '56px 16px', textAlign: 'center' }}>
-        <div style={{ display: 'inline-block', background: 'rgba(201,168,76,0.15)', border: '1px solid rgba(201,168,76,0.3)', borderRadius: 999, padding: '6px 18px', marginBottom: 20 }}>
-          <span style={{ color: '#C9A84C', fontSize: 12, fontWeight: 600, letterSpacing: 2, fontFamily: 'DM Sans, sans-serif' }}>✦ WE'D LOVE TO HEAR FROM YOU ✦</span>
+      <section style={{ background: `linear-gradient(135deg, ${C.deepRed}, ${C.darkRed})`, padding: '56px 16px', textAlign: 'center' }}>
+        <div style={{ display: 'inline-block', background: 'rgba(201,168,76,0.15)', border: `1px solid ${C.borderGold}`, borderRadius: 999, padding: '6px 18px', marginBottom: 20 }}>
+          <span style={{ color: C.gold, fontSize: 12, fontWeight: 600, letterSpacing: 2, fontFamily: 'DM Sans, sans-serif' }}>✦ WE'D LOVE TO HEAR FROM YOU ✦</span>
         </div>
-        <h1 style={{ fontFamily: 'Playfair Display, serif', fontSize: 'clamp(2rem, 5vw, 3rem)', color: 'white', margin: '0 0 12px' }}>
-          Get in <span style={{ color: '#C9A84C', fontStyle: 'italic' }}>Touch</span>
+        <h1 style={{ fontFamily: 'Playfair Display, serif', fontSize: 'clamp(2rem, 5vw, 3rem)', color: C.goldBright, margin: '0 0 12px' }}>
+          <span style={{ color: C.goldBright, fontStyle: 'italic' }}>Get in Touch</span>
         </h1>
-        <p style={{ color: '#b0a090', fontSize: 15, maxWidth: 480, margin: '0 auto', fontFamily: 'DM Sans, sans-serif', lineHeight: 1.7 }}>
+        <p style={{ color: C.textMuted, fontSize: 15, maxWidth: 480, margin: '0 auto', fontFamily: 'DM Sans, sans-serif', lineHeight: 1.7 }}>
           Questions about an order, custom requests, or just want to say hi? We're always here to help.
         </p>
       </section>
 
       {/* Contact Cards */}
-      <section style={{ padding: '56px 16px', background: '#FAFAFA' }}>
+      <section style={{ padding: '56px 16px', background: C.goldCream }}>
         <div style={{ maxWidth: 680, margin: '0 auto' }}>
-          <h2 style={{ textAlign: 'center', fontSize: 'clamp(1.3rem, 3vw, 1.8rem)', margin: '0 0 8px', color: '#1a1a1a' }}>
-            Reach Us <span style={{ color: '#C0272D' }}>Directly</span>
+          <h2 style={{ textAlign: 'center', fontSize: 'clamp(1.3rem, 3vw, 1.8rem)', margin: '0 0 8px', color: C.textOnGold }}>
+            Reach Us <span style={{ color: C.crimson }}>Directly</span>
           </h2>
-          <p style={{ textAlign: 'center', color: '#888', marginBottom: 36, fontFamily: 'DM Sans, sans-serif', fontSize: 14, margin: '8px 0 36px' }}>
+          <p style={{ textAlign: 'center', color: C.goldDeep, marginBottom: 36, fontFamily: 'DM Sans, sans-serif', fontSize: 14, margin: '8px 0 36px' }}>
             Tap any button below to connect with us instantly
           </p>
           <div style={{ display: 'flex', flexDirection: 'column', gap: 14 }}>
@@ -111,14 +141,14 @@ export default function Contact() {
       </section>
 
       {/* Custom Order CTA */}
-      <section style={{ padding: '0 16px 56px' }}>
+      <section style={{ padding: '0 16px 56px', background: C.goldCream }}>
         <div style={{ maxWidth: 680, margin: '0 auto' }}>
-          <div style={{ background: 'white', border: '1.5px solid #f0e8d8', borderRadius: 20, padding: '36px 24px', textAlign: 'center', boxShadow: '0 4px 20px rgba(192,39,45,0.06)' }}>
+          <div style={{ background: C.gold, border: `1.5px solid ${C.goldBright}`, borderRadius: 20, padding: '36px 24px', textAlign: 'center', boxShadow: `0 4px 20px ${C.glowGold}` }}>
             <div style={{ fontSize: 48, marginBottom: 12 }}>💎</div>
-            <h3 style={{ fontFamily: 'Playfair Display, serif', fontSize: 'clamp(1.2rem, 3vw, 1.6rem)', margin: '0 0 10px', color: '#1a1a1a' }}>
+            <h3 style={{ fontFamily: 'Playfair Display, serif', fontSize: 'clamp(1.2rem, 3vw, 1.6rem)', margin: '0 0 10px', color: C.textOnGold }}>
               Custom Order Enquiry
             </h3>
-            <p style={{ fontSize: 14, color: '#777', lineHeight: 1.7, maxWidth: 400, margin: '0 auto 24px', fontFamily: 'DM Sans, sans-serif' }}>
+            <p style={{ fontSize: 14, color: C.textOnGold, lineHeight: 1.7, maxWidth: 400, margin: '0 auto 24px', fontFamily: 'DM Sans, sans-serif', opacity: 0.8 }}>
               Looking for something unique? We craft custom jewellery pieces for weddings, anniversaries, and special occasions. Tell us your dream piece!
             </p>
             <a
@@ -135,7 +165,7 @@ export default function Contact() {
       </section>
 
       {/* Info strip */}
-      <section style={{ background: '#1a0a0b', padding: '40px 16px' }}>
+      <section style={{ background: C.deepRed, padding: '40px 16px' }}>
         <div style={{ maxWidth: 680, margin: '0 auto', display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(180px, 1fr))', gap: 24, textAlign: 'center' }}>
           {[
             { icon: '⏰', title: 'Business Hours', desc: 'Mon–Sat: 10am–8pm\nSun: 11am–6pm' },
@@ -144,10 +174,10 @@ export default function Contact() {
           ].map(item => (
             <div key={item.title}>
               <div style={{ fontSize: 28, marginBottom: 8 }}>{item.icon}</div>
-              <h4 style={{ color: '#C9A84C', fontSize: 12, letterSpacing: 1.5, margin: '0 0 6px', fontFamily: 'DM Sans, sans-serif', fontWeight: 700 }}>
+              <h4 style={{ color: C.gold, fontSize: 12, letterSpacing: 1.5, margin: '0 0 6px', fontFamily: 'DM Sans, sans-serif', fontWeight: 700 }}>
                 {item.title.toUpperCase()}
               </h4>
-              <p style={{ fontSize: 13, color: '#b0a090', margin: 0, lineHeight: 1.7, fontFamily: 'DM Sans, sans-serif', whiteSpace: 'pre-line' }}>
+              <p style={{ fontSize: 13, color: C.textMuted, margin: 0, lineHeight: 1.7, fontFamily: 'DM Sans, sans-serif', whiteSpace: 'pre-line' }}>
                 {item.desc}
               </p>
             </div>

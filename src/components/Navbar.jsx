@@ -18,8 +18,8 @@ export default function Navbar() {
 
   return (
     <nav style={{
-      background: 'white',
-      borderBottom: '2px solid #F7EFD8',
+      background: '#C9A84C',
+      borderBottom: '2px solid #C9A84C',
       position: 'sticky',
       top: 0,
       zIndex: 100,
@@ -39,8 +39,8 @@ export default function Navbar() {
           <span style={{ fontFamily: 'Playfair Display, serif', fontSize: 20, fontWeight: 700, color: '#C0272D', letterSpacing: 1 }}>
             RATIRAJ
           </span>
-          <span style={{ fontFamily: 'DM Sans, sans-serif', fontSize: 10, letterSpacing: 3, color: '#C9A84C', fontWeight: 500 }}>
-            JEWELS
+          <span style={{ fontFamily: 'DM Sans, sans-serif', fontSize: 10, letterSpacing: 3, color: '#ffffff', fontWeight: 500 }}>
+            BOUTERIE GALLERY
           </span>
         </Link>
 
